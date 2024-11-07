@@ -33,7 +33,7 @@ export default function TransactionForm({ onClose, isOpen }) {
   }
 
   return (
-    <Modal onClose={onClose} isOpen={isOpen}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit}>
         <ModalOverlay />
         <ModalContent>
@@ -54,24 +54,26 @@ export default function TransactionForm({ onClose, isOpen }) {
               <Input
                 placeholder="Enter Transaction amount"
                 name="amount"
-                type="text"
+                type="number"
                 onChange={handleFormChange}
               />
             </FormControl>
             <RadioGroup mt={"5"} value={value} onChange={setValue}>
               <Radio
+                checked={formData.type === "income"}
                 value="income"
                 colorScheme="blue"
                 name="type"
-                checked={formData.type === "income"}
+                onChange={handleFormChange}
               >
                 Income
               </Radio>
               <Radio
+                checked={formData.type === "expense"}
                 value="expense"
                 colorScheme="blue"
                 name="type"
-                checked={formData.type === "expense"}
+                onChange={handleFormChange}
               >
                 Expense
               </Radio>
@@ -81,7 +83,7 @@ export default function TransactionForm({ onClose, isOpen }) {
             <Button onClick={onClose} mr={"4"}>
               Cancel
             </Button>
-            <Button onClick={onClose} typeof="submit">
+            <Button onClick={onClose} type="submit">
               Add
             </Button>
           </ModalFooter>
